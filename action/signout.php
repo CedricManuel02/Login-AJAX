@@ -1,5 +1,8 @@
 <?php
 session_start();
-session_destroy();
-header("Location: ../pages/login.php");
-exit();
+include "../constant/constant.php";
+include "../helper/helper.php";
+include "../controller/AccountController.php";
+
+$account = new AccountController($connection);
+$account->logout();
