@@ -21,23 +21,62 @@ if (!isset($_SESSION["user_email"])) {
 <body data-theme="dark">
     <!--Navbar-->
 
-    <nav class="w-full px-10 absolute py-5 shadow-b bg-base-100 shadow-md flex items-center justify-between">
-        <div class="flex items-center gap-2">
-            <img class="w-10" src="https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/235_Nvidia_logo-512.png" alt="logo">
-            <h3 class="text-neutral-content font-semibold">Nvidia</h3>
-        </div>
-        <ul class="flex gap-10 items-center">
-            <li class="hover:text-green-600/80 text-neutral-content font-medium text-sm"><a href="#">Home</a></li>
-            <li class="hover:text-green-600/80 text-neutral-content font-medium text-sm"><a href="#">About</a></li>
-            <li class="hover:text-green-600/80 text-neutral-content font-medium text-sm"><a href="#">Contact</a></li>
-            <li class="hover:text-green-600/80 text-neutral-content font-medium text-sm"><a href="#">Shop</a></li>
-        </ul>
-    </nav>
+    <?php include "../components/Navbar.php"; ?>
 
     <!--Main-->
     <main class="w-full h-screen flex flex-col gap-2 items-center justify-center">
         <h3>Welcome <?php echo $_SESSION["user_email"] ?></h3>
-        <a class="btn btn-default" href="../action/signout.php">Log out</a>
+        <div class="flex gap-4">
+            <a class="btn btn-default" href="../action/signout.php">Log out</a>
+            <label for="my_modal_6" class="btn">Create</label>
+            <input type="checkbox" id="my_modal_6" class="modal-toggle" />
+            <div class="modal" role="dialog">
+                <div class="modal-box">
+                    <h3 class="text-lg font-bold">Create Product!</h3>
+                    <p class="py-4">This modal works with a hidden checkbox!</p>
+                    <form id="form-product" method="post">
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text">Product</span>
+                            </div>
+                            <input id="product_name" name="product_name" type="text" placeholder="Enter product" class="input input-bordered w-full" required />
+                        </label>
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text">Product</span>
+                            </div>
+                            <input id="product_price" name="product_price" type="number" placeholder="Enter product price" class="input input-bordered w-full" required />
+                        </label>
+                        <div class="py-4 flex gap-2 justify-end">
+                            <label for="my_modal_6" class="btn">Close!</label>
+                            <button class="btn" type="submit" id="form-submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div id="product-table">
+            <!--Table -->
+        <div class="overflow-x-auto">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Date Created</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        include "../action/product-table.php";
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        </div>
     </main>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
